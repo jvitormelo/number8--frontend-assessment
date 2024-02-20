@@ -38,5 +38,15 @@ function Filters() {
     defaultRealStateFilters
   );
 
-  return <RealStateFilterSection filter={filter} setFilter={setFilter} />;
+  function search(filter: RealStateFilters) {
+    console.log("search", filter);
+  }
+
+  return (
+    <RealStateFilterSection
+      search={search}
+      filter={filter}
+      setFilter={setFilter}
+    />
+  );
 }

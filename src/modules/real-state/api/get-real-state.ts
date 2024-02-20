@@ -1,5 +1,6 @@
 import { RealState } from "@/modules/real-state/types";
 import Mock from "@/../public/mock.json";
+import { useQuery } from "@tanstack/react-query";
 
 type RealStateResponse = {
   Id: number;

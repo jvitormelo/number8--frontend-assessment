@@ -4,9 +4,18 @@ import { Button, Flex, Group, Select } from "@mantine/core";
 type Props = {
   filter: RealStateFilters;
   setFilter: (filter: Partial<RealStateFilters>) => void;
+  search: (filter: RealStateFilters) => void;
 };
 
-export const RealStateFilterSection = ({ filter, setFilter }: Props) => {
+export const RealStateFilterSection = ({
+  filter,
+  setFilter,
+  search,
+}: Props) => {
+  function handleSearch() {
+    search(filter);
+  }
+
   return (
     <Group align={"flex-end"}>
       <Select
@@ -20,7 +29,7 @@ export const RealStateFilterSection = ({ filter, setFilter }: Props) => {
         data={["1", "2", "3", "4", "all"]}
       />
 
-      <Button>Search</Button>
+      <Button onClick={handleSearch}>Search</Button>
     </Group>
   );
 };
