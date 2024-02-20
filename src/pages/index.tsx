@@ -1,5 +1,6 @@
 import { getRealState } from "@/modules/real-state/api/get-real-state";
 import { RealStateList } from "@/modules/real-state/components/list";
+import { RealState } from "@/modules/real-state/types";
 import { GetStaticProps } from "next";
 import { Inter } from "next/font/google";
 

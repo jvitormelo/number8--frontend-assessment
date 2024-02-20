@@ -1,4 +1,5 @@
 import { RealStateCard } from "@/modules/real-state/components/card";
+import { RealState } from "@/modules/real-state/types";
 
 type Props = {
   realState: RealState[];

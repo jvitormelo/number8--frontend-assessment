@@ -1,4 +1,4 @@
-type RealState = {
+export type RealState = {
   id: number;
   dateListed: string;
   title: string;
@@ -12,4 +12,11 @@ type RealState = {
   bathrooms: number;
   parking: number;
   yearBuilt: number;
+};
+
+export type RealStateFilters = {
+  bedrooms: number;
+  bathrooms: number;
+  parking: number;
+  minPrice: number;
 };
