@@ -1,4 +1,5 @@
 import { RealState } from "@/modules/real-state/types";
+import Mock from "@/../public/mock.json";
 
 type RealStateResponse = {
   Id: number;
@@ -17,15 +18,7 @@ type RealStateResponse = {
 };
 
 export const getRealState = async (): Promise<RealState[]> => {
-  const res = await fetch(
-    "https://s3.us-west-2.amazonaws.com/cdn.number8.com/LA/listings.json"
-  );
-
-  if (!res.ok) {
-    throw new Error(res.statusText);
-  }
-
-  const data: RealStateResponse[] = await res.json();
+  const data: RealStateResponse[] = Mock;
 
   return data.map((realState) => ({
     bathrooms: realState.Bathrooms,

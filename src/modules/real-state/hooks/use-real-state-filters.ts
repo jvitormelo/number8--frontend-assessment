@@ -1,36 +1,55 @@
+import { defaultRealStateFilters } from "@/modules/real-state/constants";
 import { RealStateFilters } from "@/modules/real-state/types";
 import { useRouter } from "next/router";
+import { useMemo } from "react";
 
-const defaultFilters: RealStateFilters = {
-  bathrooms: 1,
-  bedrooms: 1,
+function formatDefaultQueryValue(
+  query: string | string[] | undefined,
+  defaultValue: string | undefined
+) {
+  let newValue = Array.isArray(query) ? query[0] : query;
 
-  minPrice: undefined,
-  parking: undefined,
-};
+  if (!newValue) {
+    return defaultValue;
+  }
+
+  if (newValue === "all") {
+    return newValue;
+  }
+
+  const parsedValue = Number(newValue);
+
+  if (isNaN(parsedValue)) {
+    return defaultValue;
+  }
+
+  return newValue;
+}
 
 export const useRealStateFilters = () => {
-  const { query, push } = useRouter();
+  const { query } = useRouter();
 
-  const filter: RealStateFilters = {
-    bathrooms: query.bathrooms
-      ? parseInt(query.bathrooms as string)
-      : defaultFilters.bathrooms,
-    bedrooms: query.bedrooms
-      ? parseInt(query.bedrooms as string)
-      : defaultFilters.bedrooms,
-    minPrice: query.minPrice ? parseInt(query.minPrice as string) : undefined,
-    parking: query.parking ? parseInt(query.parking as string) : undefined,
-  };
+  const filter: RealStateFilters = useMemo(
+    () => ({
+      bathrooms: formatDefaultQueryValue(
+        query.bathrooms,
+        defaultRealStateFilters.bathrooms
+      )!,
+      bedrooms: formatDefaultQueryValue(
+        query.bedrooms,
+        defaultRealStateFilters.bedrooms
+      )!,
+      minPrice: formatDefaultQueryValue(
+        query.minPrice,
+        defaultRealStateFilters.minPrice
+      ),
+      parking: formatDefaultQueryValue(
+        query.parking,
+        defaultRealStateFilters.parking
+      ),
+    }),
+    [query]
+  );
 
-  const setFilter = (newFilter: Partial<RealStateFilters>) => {
-    const newQuery = {
-      ...query,
-      ...newFilter,
-    };
-
-    push({ query: newQuery });
-  };
-
-  return { filter, setFilter };
+  return { filters: filter };
 };

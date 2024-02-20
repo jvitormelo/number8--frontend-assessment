@@ -15,8 +15,8 @@ export type RealState = {
 };
 
 export type RealStateFilters = {
-  bedrooms: number;
-  bathrooms: number;
-  parking?: number;
-  minPrice?: number;
+  bedrooms: string;
+  bathrooms: string;
+  parking?: string;
+  minPrice?: string;
 };

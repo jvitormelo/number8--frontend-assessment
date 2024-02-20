@@ -1,12 +1,11 @@
 import { getRealState } from "@/modules/real-state/api/get-real-state";
 import { RealStateFilterSection } from "@/modules/real-state/components/filter";
 import { RealStateList } from "@/modules/real-state/components/list";
-import { useRealStateFilters } from "@/modules/real-state/hooks/use-real-state-filters";
-import { RealState } from "@/modules/real-state/types";
+import { defaultRealStateFilters } from "@/modules/real-state/constants";
+import { RealState, RealStateFilters } from "@/modules/real-state/types";
+import { Stack } from "@mantine/core";
 import { GetStaticProps } from "next";
-import { Inter } from "next/font/google";
-
-const inter = Inter({ subsets: ["latin"] });
+import { useReducer } from "react";
 
 type Props = {
   realState: RealState[];
@@ -24,15 +23,20 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
 
 export default function Home({ realState }: Props) {
   return (
-    <main className={`flex min-h-screen p-24 ${inter.className}`}>
+    <Stack component={"main"}>
       <Filters />
       <RealStateList realState={realState} />
-    </main>
+    </Stack>
   );
 }
 
 function Filters() {
-  const { filter, setFilter } = useRealStateFilters();
+  const [filter, setFilter] = useReducer(
+    (state: RealStateFilters, newState: Partial<RealStateFilters>) => {
+      return { ...state, ...newState };
+    },
+    defaultRealStateFilters
+  );
 
   return <RealStateFilterSection filter={filter} setFilter={setFilter} />;
 }
