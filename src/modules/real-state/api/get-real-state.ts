@@ -1,3 +1,5 @@
+import { RealState } from "@/modules/real-state/types";
+
 type RealStateResponse = {
   Id: number;
   DateListed: string;

@@ -1,3 +1,4 @@
+import { RealState } from "@/modules/real-state/types";
 import Image from "next/image";
 
 type Props = {
@@ -16,7 +17,7 @@ export const RealStateCard = ({ realState }: Props) => {
       />
       <div className="p-4">
         <h2 className="text-xl font-bold">{realState.title}</h2>
-        <p className="text-gray-500">{realState.description}</p>
+
         <p className="text-xl font-bold">{realState.salePrice}</p>
       </div>
     </div>
