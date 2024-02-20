@@ -1,7 +1,7 @@
 import { getRealState } from "@/modules/real-state/api/get-real-state";
 import { RealStateFilterSection } from "@/modules/real-state/components/filter";
 import { RealStateList } from "@/modules/real-state/components/list";
-import { useRealStateFilter } from "@/modules/real-state/hooks/useRealStateFilter";
+import { useRealStateFilters } from "@/modules/real-state/hooks/use-real-state-filters";
 import { RealState } from "@/modules/real-state/types";
 import { GetStaticProps } from "next";
 import { Inter } from "next/font/google";
@@ -23,11 +23,16 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
 };
 
 export default function Home({ realState }: Props) {
-  const { filter, setFilter } = useRealStateFilter();
   return (
     <main className={`flex min-h-screen p-24 ${inter.className}`}>
-      <RealStateFilterSection filter={filter} setFilter={setFilter} />
+      <Filters />
       <RealStateList realState={realState} />
     </main>
   );
+}
+
+function Filters() {
+  const { filter, setFilter } = useRealStateFilters();
+
+  return <RealStateFilterSection filter={filter} setFilter={setFilter} />;
 }
