@@ -1,22 +1,35 @@
-import { RealStateFilters } from "@/modules/real-state/types";
-import {
-  Box,
-  Button,
-  Flex,
-  Group,
-  RangeSlider,
-  Select,
-  Slider,
-  Text,
-} from "@mantine/core";
-import Link from "next/link";
+import { RealStateFilter } from "@/modules/real-state/types";
+import { Box, Button, Group, Select, Slider, Text } from "@mantine/core";
+import { useState } from "react";
 
 type Props = {
-  filter: RealStateFilters;
-  setFilter: (filter: Partial<RealStateFilters>) => void;
+  filter: RealStateFilter;
+  setFilter: (filter: Partial<RealStateFilter>) => void;
+  search: (filter: RealStateFilter) => Promise<void>;
+  clear: () => Promise<void>;
 };
 
-export const RealStateFilterSection = ({ filter, setFilter }: Props) => {
+export const RealStateFilterSection = ({
+  filter,
+  setFilter,
+  search,
+  clear,
+}: Props) => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  function handleSearch() {
+    setIsLoading(true);
+    search(filter).finally(() => {
+      setIsLoading(false);
+    });
+  }
+  function handleClear() {
+    setIsLoading(true);
+    clear().finally(() => {
+      setIsLoading(false);
+    });
+  }
+
   return (
     <Group align={"flex-end"}>
       <Select
@@ -60,10 +73,14 @@ export const RealStateFilterSection = ({ filter, setFilter }: Props) => {
         />
       </Box>
 
-      {/* Because I'm doing SSR for the search, i can just push a new page and the SSR will handle for me */}
-      <Link href={{ query: filter }}>
-        <Button>Search</Button>
-      </Link>
+      <Group gap={"xs"}>
+        <Button loading={isLoading} onClick={handleSearch}>
+          Search
+        </Button>
+        <Button variant="subtle" onClick={handleClear}>
+          Clear
+        </Button>
+      </Group>
     </Group>
   );
 };

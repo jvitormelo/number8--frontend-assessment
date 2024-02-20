@@ -14,7 +14,7 @@ export type RealState = {
   yearBuilt: number;
 };
 
-export type RealStateFilters = Partial<{
+export type RealStateFilter = Partial<{
   bedrooms: string | null;
   bathrooms: string | null;
   parking: string | null;
