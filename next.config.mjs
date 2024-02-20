@@ -2,7 +2,10 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["images.unsplash.com", "dummyimage.com"],
+    remotePatterns: [
+      { hostname: "images.unsplash.com" },
+      { hostname: "dummyimage.com" },
+    ],
   },
 };
 

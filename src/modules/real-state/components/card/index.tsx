@@ -1,4 +1,6 @@
 import { RealState } from "@/modules/real-state/types";
+import { formatDollar } from "@/utils/currency";
+import { Badge, Box, Button, Card, Group, Stack, Text } from "@mantine/core";
 import Image from "next/image";
 
 type Props = {
@@ -7,19 +9,33 @@ type Props = {
 
 export const RealStateCard = ({ realState }: Props) => {
   return (
-    <div className="flex flex-col items-center justify-center w-64 h-64 bg-white rounded-lg shadow-lg">
-      <Image
-        src={realState.thumbnailURL}
-        alt={realState.title}
-        width={150}
-        height={150}
-        className="w-full h-32 object-cover rounded-t-lg"
-      />
-      <div className="p-4">
-        <h2 className="text-xl font-bold">{realState.title}</h2>
+    <Card shadow="sm" padding="lg" radius="md" withBorder>
+      <Box pos={"relative"} h={"150px"}>
+        <Image
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 20vw"
+          src={realState.thumbnailURL}
+          fill
+          alt={realState.title}
+        />
+      </Box>
 
-        <p className="text-xl font-bold">{realState.salePrice}</p>
-      </div>
-    </div>
+      <Stack my={"md"} gap={"xs"}>
+        <Text fw={500}>{realState.title}</Text>
+        <Badge color="gray">Location</Badge>
+        <Text size="sm" c="dimmed">
+          {realState.bedrooms} Bedrooms | {realState.bathrooms} Bathrooms
+        </Text>
+      </Stack>
+
+      <Box mt="auto">
+        <Text size="lg" fw={"bold"} mb={"md"} c="dark">
+          {formatDollar(realState.salePrice)}
+        </Text>
+
+        <Button color="blue" fullWidth radius="md">
+          View Details
+        </Button>
+      </Box>
+    </Card>
   );
 };
