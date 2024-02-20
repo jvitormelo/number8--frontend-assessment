@@ -9,7 +9,7 @@ const defaultFilters: RealStateFilters = {
   parking: undefined,
 };
 
-export const useRealStateFilter = () => {
+export const useRealStateFilters = () => {
   const { query, push } = useRouter();
 
   const filter: RealStateFilters = {
