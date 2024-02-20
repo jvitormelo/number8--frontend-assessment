@@ -1,52 +1,54 @@
 import { getRealState } from "@/modules/real-state/api/get-real-state";
 import { RealStateFilterSection } from "@/modules/real-state/components/filter";
 import { RealStateList } from "@/modules/real-state/components/list";
-import { defaultRealStateFilters } from "@/modules/real-state/constants";
 import { RealState, RealStateFilters } from "@/modules/real-state/types";
+import { filterRealState } from "@/modules/real-state/utils/filter-real-state";
+import { parseRealStateQuery } from "@/modules/real-state/utils/parse-query";
 import { Stack } from "@mantine/core";
-import { GetStaticProps } from "next";
-import { useReducer } from "react";
+import { GetServerSideProps } from "next";
+import { useState } from "react";
 
 type Props = {
   realState: RealState[];
+  initialFilters: RealStateFilters;
 };
 
-export const getStaticProps: GetStaticProps<Props> = async () => {
+// I could have used client side filtering, but I because I created the project with Next.js, I decided to use SSR
+// Because this is only demo, I did not put a SSR loading state
+export const getServerSideProps: GetServerSideProps<Props> = async (
+  context
+) => {
   const realState = await getRealState();
+
+  const filters = parseRealStateQuery(context.query);
 
   return {
     props: {
-      realState,
+      realState: filterRealState(realState, filters),
+      initialFilters: filters,
     },
   };
 };
 
-export default function Home({ realState }: Props) {
+export default function Home({ realState, initialFilters }: Props) {
   return (
     <Stack component={"main"}>
-      <Filters />
+      <Filters
+        key={JSON.stringify(initialFilters)}
+        initialFilters={initialFilters}
+      />
       <RealStateList realState={realState} />
     </Stack>
   );
 }
 
-function Filters() {
-  const [filter, setFilter] = useReducer(
-    (state: RealStateFilters, newState: Partial<RealStateFilters>) => {
-      return { ...state, ...newState };
-    },
-    defaultRealStateFilters
-  );
-
-  function search(filter: RealStateFilters) {
-    console.log("search", filter);
-  }
+function Filters({ initialFilters }: { initialFilters: RealStateFilters }) {
+  const [filter, setFilter] = useState<RealStateFilters>(initialFilters);
 
   return (
     <RealStateFilterSection
-      search={search}
       filter={filter}
-      setFilter={setFilter}
+      setFilter={(newValue) => setFilter((old) => ({ ...old, ...newValue }))}
     />
   );
 }

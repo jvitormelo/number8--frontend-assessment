@@ -1,35 +1,69 @@
 import { RealStateFilters } from "@/modules/real-state/types";
-import { Button, Flex, Group, Select } from "@mantine/core";
+import {
+  Box,
+  Button,
+  Flex,
+  Group,
+  RangeSlider,
+  Select,
+  Slider,
+  Text,
+} from "@mantine/core";
+import Link from "next/link";
 
 type Props = {
   filter: RealStateFilters;
   setFilter: (filter: Partial<RealStateFilters>) => void;
-  search: (filter: RealStateFilters) => void;
 };
 
-export const RealStateFilterSection = ({
-  filter,
-  setFilter,
-  search,
-}: Props) => {
-  function handleSearch() {
-    search(filter);
-  }
-
+export const RealStateFilterSection = ({ filter, setFilter }: Props) => {
   return (
     <Group align={"flex-end"}>
       <Select
-        value={filter.bathrooms.toString()}
+        value={filter.bedrooms}
         onChange={(value) => {
-          console.log(value);
-          setFilter({ bathrooms: value ?? "1" });
+          setFilter({ bedrooms: value });
         }}
-        label="Beedrooms"
-        placeholder="Pick value"
-        data={["1", "2", "3", "4", "all"]}
+        label="Bedrooms"
+        placeholder="All"
+        data={["1", "2", "3", "4"]}
+      />
+      <Select
+        value={filter.bathrooms}
+        onChange={(value) => {
+          setFilter({ bathrooms: value });
+        }}
+        label="Bathrooms"
+        placeholder="All"
+        data={["1", "2", "3", "4"]}
       />
 
-      <Button onClick={handleSearch}>Search</Button>
+      <Select
+        value={filter.parking}
+        onChange={(value) => {
+          setFilter({ parking: value });
+        }}
+        label="Parking"
+        placeholder="All"
+        data={["1", "2", "3", "4"]}
+      />
+
+      <Box w={200}>
+        <Text>Min Price: {filter.minPrice}</Text>
+        <Slider
+          value={Number(filter.minPrice)}
+          onChangeEnd={(value) => {
+            setFilter({ minPrice: value.toString() });
+          }}
+          min={200_000}
+          max={600_000}
+        />
+      </Box>
+
+      {/* Because I'm doing SSR for the search, i can just push a new page and the SSR will handle for me */}
+      <Link href={{ query: filter }}>
+        <Button>Search</Button>
+      </Link>
     </Group>
   );
 };

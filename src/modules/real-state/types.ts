@@ -14,9 +14,9 @@ export type RealState = {
   yearBuilt: number;
 };
 
-export type RealStateFilters = {
-  bedrooms: string;
-  bathrooms: string;
-  parking?: string;
-  minPrice?: string;
-};
+export type RealStateFilters = Partial<{
+  bedrooms: string | null;
+  bathrooms: string | null;
+  parking: string | null;
+  minPrice: string | null;
+}>;
