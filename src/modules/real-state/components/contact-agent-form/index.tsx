@@ -1,99 +1,69 @@
-import { yupResolver } from "@hookform/resolvers/yup";
-import { Button, Card, Stack, Text, TextInput, Textarea } from "@mantine/core";
-import { Controller, useForm } from "react-hook-form";
-import { object, string } from "yup";
-
-// TODO > move to a shared file
-const allowNumbersRegex = /^\d*$/;
-
-const formSchema = object({
-  name: string().required(),
-  email: string().email().required(),
-  phone: string().matches(allowNumbersRegex, "Only numbers").required(),
-  comment: string().required(),
-});
+import { Form } from "@/components/form";
+import { useFeedback } from "@/hooks/use-feedback";
+import { useContactAgentForm } from "@/modules/real-state/components/contact-agent-form/use-form";
+import { Alert, Button, Card, Stack, Text } from "@mantine/core";
 
 export function ContactAgentForm() {
-  const { control, handleSubmit } = useForm({
-    resolver: yupResolver(formSchema),
-    mode: "onSubmit",
-    defaultValues: {
-      name: "",
-      email: "",
-      phone: "",
-      comment: "",
-    },
-  });
+  const { control, handleSubmit } = useContactAgentForm();
+  const { feedback, setFeedback } = useFeedback();
 
   const onSubmit = handleSubmit((data) => {
+    setFeedback({
+      title: "Message sent successfully",
+      message: "We will contact you soon",
+      color: "green",
+    });
+
     console.log(data);
   });
 
   return (
     <Card withBorder h={"full"} p={"xl"} shadow="lg">
-      <form onSubmit={onSubmit}>
+      <Form onSubmit={onSubmit}>
         <Stack>
           <Text mx={"auto"} display={"flex"} mb={"xs"} size="xl">
             Contact Agent
           </Text>
 
-          <Controller
+          <Form.TextInput
             name="name"
             control={control}
-            render={({ field, fieldState }) => (
-              <TextInput
-                {...field}
-                label="Full Name"
-                required
-                error={fieldState.error?.message}
-              />
-            )}
+            label="Full Name"
+            required
           />
 
-          <Controller
+          <Form.TextInput
             name="email"
             control={control}
-            render={({ field, fieldState }) => (
-              <TextInput
-                {...field}
-                label="Email"
-                type="email"
-                required
-                error={fieldState.error?.message}
-              />
-            )}
+            label="Email"
+            type="email"
+            required
           />
 
-          <Controller
+          <Form.TextInput
             name="phone"
             control={control}
-            render={({ field, fieldState }) => (
-              <TextInput
-                {...field}
-                label="Phone Number"
-                type="tel"
-                required
-                error={fieldState.error?.message}
-              />
-            )}
+            label="Phone Number"
+            type="tel"
+            required
           />
 
-          <Controller
+          <Form.TextArea
             name="comment"
             control={control}
-            render={({ field, fieldState }) => (
-              <Textarea
-                {...field}
-                label="Comments"
-                required
-                error={fieldState.error?.message}
-              />
-            )}
+            label="Comments"
+            required
           />
+
+          {feedback && (
+            <Alert color={feedback.color} title={feedback.title}>
+              {feedback.message}
+            </Alert>
+          )}
 
           <Button type="submit">Contact Now</Button>
         </Stack>
-      </form>
+      </Form>
     </Card>
   );
 }
