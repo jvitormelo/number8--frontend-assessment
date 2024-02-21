@@ -1,6 +1,6 @@
 import { allRealEstateData } from "@/modules/real-estate/data";
 import { filterRealState } from "@/modules/real-estate/utils/filter-real-state";
-import { parseRealStateQuery } from "@/modules/real-estate/utils/parse-query";
+import { parseRealEstateQuery } from "@/modules/real-estate/utils/parse-query";
 import { RealEstatesView } from "@/modules/real-estate/views/real-estates";
 import { GetServerSideProps } from "next";
 import { ComponentProps } from "react";
@@ -11,7 +11,7 @@ type Props = ComponentProps<typeof RealEstatesView>;
 export const getServerSideProps: GetServerSideProps<Props> = async (
   context
 ) => {
-  const filters = parseRealStateQuery(context.query);
+  const filters = parseRealEstateQuery(context.query);
 
   await new Promise((resolve) => setTimeout(resolve, 200));
 

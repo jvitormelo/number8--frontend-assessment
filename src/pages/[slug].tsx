@@ -25,10 +25,11 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
     (realEstate) => realEstate.slug === slug
   );
 
+  if (!realEstate) return { notFound: true };
+
   return {
-    notFound: !realEstate,
     props: {
-      realEstate: realEstate!,
+      realEstate: realEstate,
     },
   };
 };

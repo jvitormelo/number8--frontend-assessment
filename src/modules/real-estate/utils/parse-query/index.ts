@@ -5,7 +5,7 @@ function getStringValue(value: string | string[] | undefined) {
   return Array.isArray(value) ? value[0] : value || null;
 }
 
-export function parseRealStateQuery(query: ParsedUrlQuery): RealEstateFilter {
+export function parseRealEstateQuery(query: ParsedUrlQuery): RealEstateFilter {
   return {
     bedrooms: getStringValue(query.bedrooms),
     bathrooms: getStringValue(query.bathrooms),
