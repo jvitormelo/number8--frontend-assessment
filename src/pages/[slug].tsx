@@ -6,6 +6,7 @@ import {
   Box,
   Button,
   Card,
+  Flex,
   Grid,
   GridCol,
   Group,
@@ -55,28 +56,30 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
 
 const RealEstateDetail = ({ realEstate }: Props) => {
   return (
-    <Grid gutter={"lg"}>
-      <GridCol span={{ xs: 12, md: 8 }}>
-        <Stack>
-          <Header realEstate={realEstate} />
-          <Box pos={"relative"} h={"400px"}>
-            <ImageNext
-              src={realEstate.pictureURL}
-              alt={realEstate.title}
-              fill
-              sizes="(max-width: 768px) 100vw,  70vw"
-            />
-          </Box>
-          <Info realEstate={realEstate} />
+    <>
+      <Header realEstate={realEstate} />
+      <Grid gutter={"lg"}>
+        <GridCol span={{ xs: 12, md: 8 }}>
+          <Stack>
+            <Box pos={"relative"} h={"400px"}>
+              <ImageNext
+                src={realEstate.pictureURL}
+                alt={realEstate.title}
+                fill
+                sizes="(max-width: 768px) 100vw,  70vw"
+              />
+            </Box>
+            <Info realEstate={realEstate} />
 
-          <Text>{realEstate.description}</Text>
-        </Stack>
-      </GridCol>
+            <Text>{realEstate.description}</Text>
+          </Stack>
+        </GridCol>
 
-      <GridCol span={{ xs: 12, md: 4 }}>
-        <Form />
-      </GridCol>
-    </Grid>
+        <GridCol span={{ xs: 12, md: 4 }}>
+          <Form />
+        </GridCol>
+      </Grid>
+    </>
   );
 };
 
@@ -84,20 +87,29 @@ function Header({
   realEstate: { title, location, salePrice, dateListed },
 }: Props) {
   return (
-    <Group justify={"space-between"} component={"header"}>
-      <Stack gap={"xs"}>
-        <Title order={1} fw={500}>
-          {title}
-        </Title>
-        <Text size="lg">{location}</Text>
-      </Stack>
-      <Stack gap={"xs"} align="flex-end">
-        <Title order={1} fw={500}>
-          {formatDollar(salePrice)}
-        </Title>
-        <Text c={"gray"}>{formatDate(dateListed)}</Text>
-      </Stack>
-    </Group>
+    <Grid>
+      <GridCol span={{ lg: 8, xs: 12 }}>
+        <Group justify={"space-between"} component={"header"}>
+          <Stack gap={0}>
+            <Title order={2} fw={500}>
+              {title}
+            </Title>
+            <Text size="lg">{location}</Text>
+          </Stack>
+          <Stack gap={0} align="flex-end">
+            <Title order={2} fw={500}>
+              {formatDollar(salePrice)}
+            </Title>
+            <Text c={"gray"}>{formatDate(dateListed)}</Text>
+          </Stack>
+        </Group>
+      </GridCol>
+      <GridCol span={{ lg: 4, xs: 12 }} display={"flex"}>
+        <Flex ml={"auto"} mt={"xs"}>
+          <SaveProperty />
+        </Flex>
+      </GridCol>
+    </Grid>
   );
 }
 
@@ -145,6 +157,10 @@ function Form() {
       </form>
     </Card>
   );
+}
+
+function SaveProperty() {
+  return <Button variant="light">Save Property</Button>;
 }
 
 export default RealEstateDetail;
