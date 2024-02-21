@@ -1,3 +1,4 @@
+import { BackButton } from "@/components/back-button";
 import { getRealEstate } from "@/modules/real-state/api/get-real-state";
 import { ContactAgentForm } from "@/modules/real-state/components/contact-agent-form";
 import { RealEstate } from "@/modules/real-state/types";
@@ -11,12 +12,8 @@ import {
   Grid,
   GridCol,
   Group,
-  Image,
-  SimpleGrid,
   Stack,
   Text,
-  TextInput,
-  Textarea,
   Title,
 } from "@mantine/core";
 import { GetStaticPaths, GetStaticProps } from "next";
@@ -58,6 +55,7 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
 const RealEstateDetail = ({ realEstate }: Props) => {
   return (
     <>
+      <BackButton mb={"xs"} />
       <Header realEstate={realEstate} />
       <Grid gutter={"lg"}>
         <GridCol span={{ xs: 12, md: 8 }}>
