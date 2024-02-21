@@ -14,7 +14,7 @@ const formSchema = object({
 });
 
 export const useContactAgentForm = () => {
-  const { control, handleSubmit } = useForm({
+  const { control, handleSubmit, reset } = useForm({
     resolver: yupResolver(formSchema),
     mode: "onSubmit",
     defaultValues: {
@@ -25,5 +25,5 @@ export const useContactAgentForm = () => {
     },
   });
 
-  return { control, handleSubmit };
+  return { control, handleSubmit, reset };
 };

@@ -4,7 +4,7 @@ import { useContactAgentForm } from "@/modules/real-state/components/contact-age
 import { Alert, Button, Card, Stack, Text } from "@mantine/core";
 
 export function ContactAgentForm() {
-  const { control, handleSubmit } = useContactAgentForm();
+  const { control, handleSubmit, reset } = useContactAgentForm();
   const { feedback, setFeedback } = useFeedback();
 
   const onSubmit = handleSubmit((data) => {
@@ -15,6 +15,7 @@ export function ContactAgentForm() {
     });
 
     console.log(data);
+    reset();
   });
 
   return (
