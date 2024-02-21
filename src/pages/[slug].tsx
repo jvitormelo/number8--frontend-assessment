@@ -1,4 +1,4 @@
-import { getRealEstate } from "@/modules/real-estate/api/get-real-state";
+import { allRealEstateData } from "@/modules/real-estate/data";
 import { RealEstateDetailView } from "@/modules/real-estate/views/real-estate-detail";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { ComponentProps } from "react";
@@ -10,9 +10,8 @@ type Params = {
 type Props = ComponentProps<typeof RealEstateDetailView>;
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
-  const realEstates = await getRealEstate();
   return {
-    paths: realEstates.map((realEstate) => ({
+    paths: allRealEstateData.map((realEstate) => ({
       params: { slug: realEstate.slug },
     })),
     fallback: false,
@@ -22,9 +21,9 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
 export const getStaticProps: GetStaticProps<Props> = async (context) => {
   const slug = context.params?.slug as string;
 
-  const realEstates = await getRealEstate();
-
-  const realEstate = realEstates.find((realEstate) => realEstate.slug === slug);
+  const realEstate = allRealEstateData.find(
+    (realEstate) => realEstate.slug === slug
+  );
 
   return {
     notFound: !realEstate,

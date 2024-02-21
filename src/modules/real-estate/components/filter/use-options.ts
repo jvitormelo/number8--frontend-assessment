@@ -1,4 +1,4 @@
-import { allRealEstateData } from "@/modules/real-estate/api/get-real-state";
+import { allRealEstateData } from "@/modules/real-estate/data";
 
 function createUniqueOptions(data: number[]): string[] {
   const uniqueOptions = new Set(data);
