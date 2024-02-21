@@ -1,7 +1,7 @@
-import { getRealEstate } from "@/modules/real-state/api/get-real-state";
-import { filterRealState } from "@/modules/real-state/utils/filter-real-state";
-import { parseRealStateQuery } from "@/modules/real-state/utils/parse-query";
-import { RealEstatesView } from "@/modules/real-state/views/real-estates";
+import { getRealEstate } from "@/modules/real-estate/api/get-real-state";
+import { filterRealState } from "@/modules/real-estate/utils/filter-real-state";
+import { parseRealStateQuery } from "@/modules/real-estate/utils/parse-query";
+import { RealEstatesView } from "@/modules/real-estate/views/real-estates";
 import { GetServerSideProps } from "next";
 import { ComponentProps } from "react";
 

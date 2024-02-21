@@ -1,5 +1,5 @@
-import { getRealEstate } from "@/modules/real-state/api/get-real-state";
-import { RealEstateDetailView } from "@/modules/real-state/views/real-estate-detail";
+import { getRealEstate } from "@/modules/real-estate/api/get-real-state";
+import { RealEstateDetailView } from "@/modules/real-estate/views/real-estate-detail";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { ComponentProps } from "react";
 

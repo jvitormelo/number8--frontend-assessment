@@ -1,6 +1,6 @@
-import { RealEstate } from "@/modules/real-state/types";
+import { RealEstate } from "@/modules/real-estate/types";
 import { formatCurrency } from "@/utils/currency";
-import { Badge, Box, Button, Card, Group, Stack, Text } from "@mantine/core";
+import { Badge, Box, Button, Card, Stack, Text } from "@mantine/core";
 import Image from "next/image";
 import Link from "next/link";
 

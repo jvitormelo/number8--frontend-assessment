@@ -1,4 +1,4 @@
-import { RealEstateFilter } from "@/modules/real-state/types";
+import { RealEstateFilter } from "@/modules/real-estate/types";
 import { ParsedUrlQuery } from "querystring";
 
 function getStringValue(value: string | string[] | undefined) {

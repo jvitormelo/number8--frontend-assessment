@@ -1,7 +1,7 @@
 import { BackButton } from "@/components/back-button";
-import { ContactAgentForm } from "@/modules/real-state/components/contact-agent-form";
-import { RealEstateHeader } from "@/modules/real-state/components/header";
-import { RealEstate } from "@/modules/real-state/types";
+import { ContactAgentForm } from "@/modules/real-estate/components/contact-agent-form";
+import { RealEstateHeader } from "@/modules/real-estate/components/header";
+import { RealEstate } from "@/modules/real-estate/types";
 import { Box, Card, Grid, GridCol, Group, Stack, Text } from "@mantine/core";
 import ImageNext from "next/image";
 

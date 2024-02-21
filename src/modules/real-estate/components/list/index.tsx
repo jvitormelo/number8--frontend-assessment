@@ -1,5 +1,5 @@
-import { RealStateCard } from "@/modules/real-state/components/card";
-import { RealEstate } from "@/modules/real-state/types";
+import { RealStateCard } from "@/modules/real-estate/components/card";
+import { RealEstate } from "@/modules/real-estate/types";
 import { SimpleGrid } from "@mantine/core";
 
 type Props = {

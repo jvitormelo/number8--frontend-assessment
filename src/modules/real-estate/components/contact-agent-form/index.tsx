@@ -1,6 +1,7 @@
 import { Form } from "@/components/form";
 import { useFeedback } from "@/hooks/use-feedback";
-import { useContactAgentForm } from "@/modules/real-state/components/contact-agent-form/use-form";
+import { useContactAgentForm } from "./use-form";
+
 import { Alert, Button, Card, Stack, Text } from "@mantine/core";
 
 export function ContactAgentForm() {

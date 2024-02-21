@@ -1,10 +1,9 @@
-import { RealStateFilterSection } from "@/modules/real-state/components/filter";
-import { RealStateList } from "@/modules/real-state/components/list";
-import { RealEstate, RealEstateFilter } from "@/modules/real-state/types";
-import Home from "@/pages";
+import { RealStateFilterSection } from "@/modules/real-estate/components/filter";
+import { RealStateList } from "@/modules/real-estate/components/list";
+import { RealEstate, RealEstateFilter } from "@/modules/real-estate/types";
 import { Stack } from "@mantine/core";
 import { useRouter } from "next/router";
-import { ComponentProps, useState } from "react";
+import { useState } from "react";
 
 type Props = {
   realState: RealEstate[];

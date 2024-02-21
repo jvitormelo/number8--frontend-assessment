@@ -1,4 +1,4 @@
-import { RealEstate } from "@/modules/real-state/types";
+import { RealEstate } from "@/modules/real-estate/types";
 import { formatCurrency } from "@/utils/currency";
 import { formatDate } from "@/utils/date";
 import {

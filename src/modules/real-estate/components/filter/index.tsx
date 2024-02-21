@@ -1,5 +1,5 @@
-import { useRealStateFilterOptions } from "@/modules/real-state/components/filter/use-options";
-import { RealEstateFilter } from "@/modules/real-state/types";
+import { useRealStateFilterOptions } from "@/modules/real-estate/components/filter/use-options";
+import { RealEstateFilter } from "@/modules/real-estate/types";
 import { formatCurrency } from "@/utils/currency";
 import { Box, Button, Group, Select, Slider, Text } from "@mantine/core";
 import { useState } from "react";

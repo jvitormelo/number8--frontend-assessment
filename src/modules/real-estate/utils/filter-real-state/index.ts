@@ -1,4 +1,4 @@
-import { RealEstate, RealEstateFilter } from "@/modules/real-state/types";
+import { RealEstate, RealEstateFilter } from "@/modules/real-estate/types";
 
 function equalFilter(
   value: string | number,

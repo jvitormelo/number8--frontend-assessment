@@ -1,5 +1,5 @@
 import Mock from "@/../public/mock.json";
-import { RealEstate } from "@/modules/real-state/types";
+import { RealEstate } from "@/modules/real-estate/types";
 
 type RealStateResponse = {
   Id: number;
