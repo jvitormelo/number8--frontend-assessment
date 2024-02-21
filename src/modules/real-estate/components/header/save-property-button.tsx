@@ -2,7 +2,7 @@ import { useToast } from "@/hooks/use-toast";
 import { RealEstate } from "@/modules/real-estate/types";
 import { ActionIcon, Button, Group, Modal, Stack, Text } from "@mantine/core";
 import { useDisclosure, useLocalStorage } from "@mantine/hooks";
-import { List as ListIcon, TrashIcon } from "lucide-react";
+import { Heart, HeartOff, List as ListIcon, TrashIcon } from "lucide-react";
 import Link from "next/link";
 
 import styles from "./styles.module.css";
@@ -15,55 +15,28 @@ type SavedRealEstate = Pick<RealEstate, "id" | "title" | "slug">;
 
 export function SaveProperty({ realEstate }: Props) {
   const [opened, { open, close }] = useDisclosure(false);
-  const { showToast } = useToast();
-
-  const [savedProperties, setSavedProperties] = useLocalStorage<
-    SavedRealEstate[]
-  >({
-    key: "saved-properties",
-    defaultValue: [],
-  });
-
-  const isSaved = savedProperties.some(({ id }) => id === realEstate.id);
-
-  function handleSave() {
-    if (isSaved) {
-      setSavedProperties((oldValue) =>
-        oldValue.filter(({ id }) => id !== realEstate.id)
-      );
-      showToast({
-        title: "Property Removed",
-        message: `You have removed ${realEstate.title} from your list of properties`,
-        color: "red",
-      });
-    } else {
-      setSavedProperties([
-        ...savedProperties,
-        {
-          id: realEstate.id,
-          title: realEstate.title,
-          slug: realEstate.slug,
-        },
-      ]);
-      showToast({
-        title: "Property Saved",
-        message: `You have saved ${realEstate.title} to your list of properties`,
-      });
-    }
-  }
-
-  function removeProperty(id: number) {
-    setSavedProperties((oldValue) => oldValue.filter((item) => item.id !== id));
-  }
+  const { savedProperties, isSaved, removeProperty, handleSave } =
+    useSavedProperties(realEstate);
 
   return (
     <>
       <Group gap={"xs"}>
-        <ActionIcon variant="filled" size={"lg"} onClick={open} h={"full"}>
+        <ActionIcon variant="light" size={"lg"} onClick={open} h={"full"}>
           <ListIcon size={20} />
         </ActionIcon>
 
-        <Button onClick={handleSave} leftSection={"❤️"} variant="light">
+        <Button
+          w={180}
+          onClick={handleSave}
+          leftSection={
+            isSaved ? (
+              <Heart color="red" fill="red" size={20} />
+            ) : (
+              <Heart size={20} />
+            )
+          }
+          variant="light"
+        >
           {isSaved ? "Remove Property" : "Save Property"}
         </Button>
       </Group>
@@ -95,4 +68,54 @@ export function SaveProperty({ realEstate }: Props) {
       </Modal>
     </>
   );
+}
+
+function useSavedProperties(realEstate: RealEstate) {
+  const { showToast } = useToast();
+  const [savedProperties, setSavedProperties] = useLocalStorage<
+    SavedRealEstate[]
+  >({
+    key: "saved-properties",
+    defaultValue: [],
+  });
+
+  const isSaved = savedProperties.some(({ id }) => id === realEstate.id);
+
+  function removeProperty(id: number) {
+    setSavedProperties((oldValue) => oldValue.filter((item) => item.id !== id));
+  }
+
+  function handleSave() {
+    if (isSaved) {
+      removeProperty(realEstate.id);
+      showToast({
+        title: "Property Removed",
+        message: `You have removed ${realEstate.title} from your list of properties`,
+        color: "red",
+      });
+      return;
+    }
+
+    setSavedProperties((oldValue) => [
+      ...oldValue,
+      {
+        id: realEstate.id,
+        title: realEstate.title,
+        slug: realEstate.slug,
+      },
+    ]);
+
+    showToast({
+      title: "Property Saved",
+      message: `You have saved ${realEstate.title} to your list of properties`,
+    });
+  }
+
+  return {
+    savedProperties,
+    setSavedProperties,
+    isSaved,
+    removeProperty,
+    handleSave,
+  };
 }

@@ -1,4 +1,5 @@
 import { Button, ButtonProps } from "@mantine/core";
+import { ArrowLeft, MoveLeftIcon } from "lucide-react";
 import { useRouter } from "next/router";
 
 type Props = ButtonProps & {
@@ -22,7 +23,12 @@ export function BackButton({ fallbackRoute, ...rest }: Props) {
   }
 
   return (
-    <Button leftSection={"⬅️"} onClick={handleBack} variant="subtle" {...rest}>
+    <Button
+      leftSection={<ArrowLeft size={16} />}
+      onClick={handleBack}
+      variant="subtle"
+      {...rest}
+    >
       Back
     </Button>
   );
