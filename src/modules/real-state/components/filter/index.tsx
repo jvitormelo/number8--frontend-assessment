@@ -1,4 +1,6 @@
+import { useRealStateFilterOptions } from "@/modules/real-state/components/filter/use-options";
 import { RealEstateFilter } from "@/modules/real-state/types";
+import { formatCurrency } from "@/utils/currency";
 import { Box, Button, Group, Select, Slider, Text } from "@mantine/core";
 import { useState } from "react";
 
@@ -16,6 +18,14 @@ export const RealStateFilterSection = ({
   clear,
 }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
+
+  const {
+    bathroomsOptions,
+    bedroomsOptions,
+    parkingOptions,
+    maxPrice,
+    minPrice,
+  } = useRealStateFilterOptions();
 
   function handleSearch() {
     setIsLoading(true);
@@ -39,7 +49,7 @@ export const RealStateFilterSection = ({
         }}
         label="Bedrooms"
         placeholder="All"
-        data={["1", "2", "3", "4"]}
+        data={bedroomsOptions}
       />
       <Select
         value={filter.bathrooms}
@@ -48,7 +58,7 @@ export const RealStateFilterSection = ({
         }}
         label="Bathrooms"
         placeholder="All"
-        data={["1", "2", "3", "4"]}
+        data={bathroomsOptions}
       />
 
       <Select
@@ -58,20 +68,16 @@ export const RealStateFilterSection = ({
         }}
         label="Parking"
         placeholder="All"
-        data={["1", "2", "3", "4"]}
+        data={parkingOptions}
       />
-
-      <Box w={200}>
-        <Text>Min Price: {filter.minPrice}</Text>
-        <Slider
-          value={Number(filter.minPrice)}
-          onChangeEnd={(value) => {
-            setFilter({ minPrice: value.toString() });
-          }}
-          min={200_000}
-          max={600_000}
-        />
-      </Box>
+      <PriceRangeSlider
+        max={maxPrice}
+        min={minPrice}
+        value={filter.maxPrice ? Number(filter.maxPrice) : maxPrice}
+        onChange={(value) => {
+          setFilter({ maxPrice: value });
+        }}
+      />
 
       <Group gap={"xs"}>
         <Button loading={isLoading} onClick={handleSearch}>
@@ -84,3 +90,33 @@ export const RealStateFilterSection = ({
     </Group>
   );
 };
+
+function PriceRangeSlider({
+  onChange,
+  value,
+  min,
+  max,
+}: {
+  value: number;
+  onChange: (value: string) => void;
+  min: number;
+  max: number;
+}) {
+  const [realTimeValue, setRealTimeValue] = useState(value);
+  return (
+    <Box w={200}>
+      <Text>Max Price: {formatCurrency(realTimeValue)}</Text>
+      <Slider
+        value={realTimeValue}
+        onChange={(value) => {
+          setRealTimeValue(value);
+        }}
+        onChangeEnd={(value) => {
+          onChange(value.toString());
+        }}
+        min={min}
+        max={max}
+      />
+    </Box>
+  );
+}

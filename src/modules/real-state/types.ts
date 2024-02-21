@@ -19,5 +19,5 @@ export type RealEstateFilter = Partial<{
   bedrooms: string | null;
   bathrooms: string | null;
   parking: string | null;
-  minPrice: string | null;
+  maxPrice: string | null;
 }>;

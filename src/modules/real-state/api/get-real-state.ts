@@ -1,6 +1,5 @@
-import { RealEstate } from "@/modules/real-state/types";
 import Mock from "@/../public/mock.json";
-import { useQuery } from "@tanstack/react-query";
+import { RealEstate } from "@/modules/real-state/types";
 
 type RealStateResponse = {
   Id: number;
@@ -18,7 +17,7 @@ type RealStateResponse = {
   YearBuilt: number;
 };
 
-export const getRealEstate = async (): Promise<RealEstate[]> => {
+export const getRealEstate = (): RealEstate[] => {
   const data: RealStateResponse[] = Mock;
 
   return data.map((realState) => ({
@@ -39,3 +38,5 @@ export const getRealEstate = async (): Promise<RealEstate[]> => {
     slug: realState.Title.toLowerCase().replace(/ /g, "-") + "-" + realState.Id,
   }));
 };
+
+export const allRealEstateData = getRealEstate();

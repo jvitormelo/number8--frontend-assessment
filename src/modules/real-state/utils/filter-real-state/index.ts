@@ -19,7 +19,7 @@ export function filterRealState(
     (realState) => equalFilter(realState.parking, filters.parking),
 
     (realState) =>
-      filters.minPrice ? realState.salePrice >= Number(filters.minPrice) : true,
+      filters.maxPrice ? realState.salePrice <= Number(filters.maxPrice) : true,
   ];
 
   return realState.filter((realState) =>

@@ -2,7 +2,7 @@ import { BackButton } from "@/components/back-button";
 import { getRealEstate } from "@/modules/real-state/api/get-real-state";
 import { ContactAgentForm } from "@/modules/real-state/components/contact-agent-form";
 import { RealEstate } from "@/modules/real-state/types";
-import { formatDollar } from "@/utils/currency";
+import { formatCurrency } from "@/utils/currency";
 import { formatDate } from "@/utils/date";
 import {
   Box,
@@ -97,7 +97,7 @@ function Header({
           </Stack>
           <Stack gap={0} align="flex-end">
             <Title order={2} fw={500}>
-              {formatDollar(salePrice)}
+              {formatCurrency(salePrice)}
             </Title>
             <Text c={"gray"}>{formatDate(dateListed)}</Text>
           </Stack>

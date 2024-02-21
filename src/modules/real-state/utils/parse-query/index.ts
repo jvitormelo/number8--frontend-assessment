@@ -10,6 +10,6 @@ export function parseRealStateQuery(query: ParsedUrlQuery): RealEstateFilter {
     bedrooms: getStringValue(query.bedrooms),
     bathrooms: getStringValue(query.bathrooms),
     parking: getStringValue(query.parking),
-    minPrice: getStringValue(query.minPrice),
+    maxPrice: getStringValue(query.maxPrice),
   };
 }

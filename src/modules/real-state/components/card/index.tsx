@@ -1,5 +1,5 @@
 import { RealEstate } from "@/modules/real-state/types";
-import { formatDollar } from "@/utils/currency";
+import { formatCurrency } from "@/utils/currency";
 import { Badge, Box, Button, Card, Group, Stack, Text } from "@mantine/core";
 import Image from "next/image";
 import Link from "next/link";
@@ -30,7 +30,7 @@ export const RealStateCard = ({ realState }: Props) => {
 
       <Box mt="auto">
         <Text size="lg" fw={"bold"} mb={"md"} c="dark">
-          {formatDollar(realState.salePrice)}
+          {formatCurrency(realState.salePrice)}
         </Text>
 
         <Link href={`/${realState.slug}`}>
