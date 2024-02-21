@@ -1,10 +1,11 @@
-import { RealState } from "@/modules/real-state/types";
+import { RealEstate } from "@/modules/real-state/types";
 import { formatDollar } from "@/utils/currency";
 import { Badge, Box, Button, Card, Group, Stack, Text } from "@mantine/core";
 import Image from "next/image";
+import Link from "next/link";
 
 type Props = {
-  realState: RealState;
+  realState: RealEstate;
 };
 
 export const RealStateCard = ({ realState }: Props) => {
@@ -32,9 +33,11 @@ export const RealStateCard = ({ realState }: Props) => {
           {formatDollar(realState.salePrice)}
         </Text>
 
-        <Button color="blue" fullWidth radius="md">
-          View Details
-        </Button>
+        <Link href={`/${realState.slug}`}>
+          <Button color="blue" fullWidth radius="md">
+            View Details
+          </Button>
+        </Link>
       </Box>
     </Card>
   );

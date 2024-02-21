@@ -1,7 +1,7 @@
-import { getRealState } from "@/modules/real-state/api/get-real-state";
+import { getRealEstate } from "@/modules/real-state/api/get-real-state";
 import { RealStateFilterSection } from "@/modules/real-state/components/filter";
 import { RealStateList } from "@/modules/real-state/components/list";
-import { RealState, RealStateFilter } from "@/modules/real-state/types";
+import { RealEstate, RealEstateFilter } from "@/modules/real-state/types";
 import { filterRealState } from "@/modules/real-state/utils/filter-real-state";
 import { parseRealStateQuery } from "@/modules/real-state/utils/parse-query";
 import { Stack } from "@mantine/core";
@@ -10,21 +10,22 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 
 type Props = {
-  realState: RealState[];
-  initialFilters: RealStateFilter;
+  realState: RealEstate[];
+  initialFilters: RealEstateFilter;
 };
 
-// I could have used client side filtering, but I because I created the project with Next.js, I decided to use SSR
+// I could have used client side filtering, but because is a with Next.js, I decided to use SSR
 // Because this is only demo, I did not put a SSR loading state
 export const getServerSideProps: GetServerSideProps<Props> = async (
   context
 ) => {
-  const realState = await getRealState();
+  const realState = await getRealEstate();
 
   const filters = parseRealStateQuery(context.query);
 
-  // Simulate a slow connection
   await new Promise((resolve) => setTimeout(resolve, 200));
+
+  context.res.setHeader("Cache-Control", "s-maxage=1, stale-while-revalidate");
 
   return {
     props: {
@@ -46,11 +47,11 @@ export default function Home({ realState, initialFilters }: Props) {
   );
 }
 
-function Filters({ initialFilters }: { initialFilters: RealStateFilter }) {
+function Filters({ initialFilters }: { initialFilters: RealEstateFilter }) {
   const { push } = useRouter();
-  const [filter, setFilter] = useState<RealStateFilter>(initialFilters);
+  const [filter, setFilter] = useState<RealEstateFilter>(initialFilters);
 
-  async function search(filter: RealStateFilter) {
+  async function search(filter: RealEstateFilter) {
     await push({ query: filter });
   }
 

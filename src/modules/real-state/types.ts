@@ -1,4 +1,4 @@
-export type RealState = {
+export type RealEstate = {
   id: number;
   dateListed: string;
   title: string;
@@ -12,9 +12,10 @@ export type RealState = {
   bathrooms: number;
   parking: number;
   yearBuilt: number;
+  slug: string;
 };
 
-export type RealStateFilter = Partial<{
+export type RealEstateFilter = Partial<{
   bedrooms: string | null;
   bathrooms: string | null;
   parking: string | null;

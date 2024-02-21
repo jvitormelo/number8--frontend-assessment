@@ -1,9 +1,9 @@
 import { RealStateCard } from "@/modules/real-state/components/card";
-import { RealState } from "@/modules/real-state/types";
+import { RealEstate } from "@/modules/real-state/types";
 import { SimpleGrid } from "@mantine/core";
 
 type Props = {
-  realState: RealState[];
+  realState: RealEstate[];
 };
 
 export const RealStateList: React.FC<Props> = ({ realState }) => {

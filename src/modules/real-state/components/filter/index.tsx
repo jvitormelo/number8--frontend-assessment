@@ -1,11 +1,11 @@
-import { RealStateFilter } from "@/modules/real-state/types";
+import { RealEstateFilter } from "@/modules/real-state/types";
 import { Box, Button, Group, Select, Slider, Text } from "@mantine/core";
 import { useState } from "react";
 
 type Props = {
-  filter: RealStateFilter;
-  setFilter: (filter: Partial<RealStateFilter>) => void;
-  search: (filter: RealStateFilter) => Promise<void>;
+  filter: RealEstateFilter;
+  setFilter: (filter: Partial<RealEstateFilter>) => void;
+  search: (filter: RealEstateFilter) => Promise<void>;
   clear: () => Promise<void>;
 };
 

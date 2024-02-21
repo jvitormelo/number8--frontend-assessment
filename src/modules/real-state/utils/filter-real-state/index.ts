@@ -1,4 +1,4 @@
-import { RealState, RealStateFilter } from "@/modules/real-state/types";
+import { RealEstate, RealEstateFilter } from "@/modules/real-state/types";
 
 function equalFilter(
   value: string | number,
@@ -7,11 +7,11 @@ function equalFilter(
   return filter ? Number(value) === Number(filter) : true;
 }
 
-type Condition = (realState: RealState) => boolean;
+type Condition = (realState: RealEstate) => boolean;
 
 export function filterRealState(
-  realState: RealState[],
-  filters: RealStateFilter
+  realState: RealEstate[],
+  filters: RealEstateFilter
 ) {
   const conditions: Array<Condition> = [
     (realState) => equalFilter(realState.bathrooms, filters.bathrooms),
