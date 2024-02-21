@@ -4,6 +4,7 @@ import { formatDollar } from "@/utils/currency";
 import { formatDate } from "@/utils/date";
 import {
   Box,
+  Button,
   Card,
   Grid,
   GridCol,
@@ -12,6 +13,8 @@ import {
   SimpleGrid,
   Stack,
   Text,
+  TextInput,
+  Textarea,
   Title,
 } from "@mantine/core";
 import { GetStaticPaths, GetStaticProps } from "next";
@@ -71,9 +74,7 @@ const RealEstateDetail = ({ realEstate }: Props) => {
       </GridCol>
 
       <GridCol span={{ xs: 12, md: 4 }}>
-        <Stack>
-          <Card withBorder h={"full"}></Card>
-        </Stack>
+        <Form />
       </GridCol>
     </Grid>
   );
@@ -123,6 +124,25 @@ function Info({
           </Stack>
         ))}
       </Group>
+    </Card>
+  );
+}
+
+function Form() {
+  return (
+    <Card withBorder h={"full"} p={"xl"} shadow="lg">
+      <form>
+        <Stack>
+          <Text mx={"auto"} display={"flex"} mb={"xs"} size="xl">
+            Contact Agent
+          </Text>
+          <TextInput label="Full Name" required />
+          <TextInput label="Email" type="email" required />
+          <TextInput label="Phone" type="tel" required />
+          <Textarea minRows={2} autosize label="Comments" required />
+          <Button type="submit">Contact Now</Button>
+        </Stack>
+      </form>
     </Card>
   );
 }
