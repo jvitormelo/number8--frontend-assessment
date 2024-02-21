@@ -1,12 +1,14 @@
 import { RealStateCard } from "@/modules/real-estate/components/card";
 import { RealEstate } from "@/modules/real-estate/types";
-import { SimpleGrid } from "@mantine/core";
+import { Flex, SimpleGrid, Text, Title } from "@mantine/core";
 
 type Props = {
   realState: RealEstate[];
 };
 
 export const RealStateList: React.FC<Props> = ({ realState }) => {
+  if (!realState.length) return <NoResults></NoResults>;
+
   return (
     <SimpleGrid cols={{ lg: 4, md: 2, sm: 1, xs: 1 }}>
       {realState.map((realState) => (
@@ -15,3 +17,13 @@ export const RealStateList: React.FC<Props> = ({ realState }) => {
     </SimpleGrid>
   );
 };
+
+function NoResults() {
+  return (
+    <Flex justify={"center"}>
+      <Title order={2} mt={"lg"}>
+        No results found 😔
+      </Title>
+    </Flex>
+  );
+}
