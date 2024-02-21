@@ -25,7 +25,11 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
 
   await new Promise((resolve) => setTimeout(resolve, 200));
 
-  context.res.setHeader("Cache-Control", "s-maxage=1, stale-while-revalidate");
+  // Only work in production
+  context.res.setHeader(
+    "Cache-Control",
+    "public, s-maxage=60, stale-while-revalidate=59"
+  );
 
   return {
     props: {
