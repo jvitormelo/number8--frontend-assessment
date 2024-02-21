@@ -1,6 +1,7 @@
 import { getRealEstate } from "@/modules/real-state/api/get-real-state";
 import { RealEstate } from "@/modules/real-state/types";
 import { formatDollar } from "@/utils/currency";
+import { formatDate } from "@/utils/date";
 import {
   Box,
   Card,
@@ -51,19 +52,10 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
 
 const RealEstateDetail = ({ realEstate }: Props) => {
   return (
-    <Grid>
+    <Grid gutter={"lg"}>
       <GridCol span={{ xs: 12, md: 8 }}>
         <Stack>
-          <Group justify={"space-between"} component={"header"}>
-            <Stack>
-              <Title order={1}>{realEstate.title}</Title>
-              <Text>{realEstate.location}</Text>
-            </Stack>
-            <Stack>
-              <Title order={2}>{formatDollar(realEstate.salePrice)}</Title>
-              <Text c={"gray"}>{realEstate.dateListed}</Text>
-            </Stack>
-          </Group>
+          <Header realEstate={realEstate} />
           <Box pos={"relative"} h={"400px"}>
             <ImageNext
               src={realEstate.pictureURL}
@@ -72,35 +64,7 @@ const RealEstateDetail = ({ realEstate }: Props) => {
               sizes="(max-width: 768px) 100vw,  70vw"
             />
           </Box>
-
-          <Card withBorder p={"lg"}>
-            <Group justify="space-between">
-              <Stack gap={0} align="center">
-                <Text size="xl" fw={"bold"}>
-                  {realEstate.bedrooms}
-                </Text>
-                <Text>Bed</Text>
-              </Stack>
-              <Stack>
-                <Title order={3}>{realEstate.bathrooms}</Title>
-                <Text>Bath</Text>
-              </Stack>
-              <Stack>
-                <Title order={3}>{realEstate.parking}</Title>
-                <Text>Parking</Text>
-              </Stack>
-
-              <Stack>
-                <Title order={3}>{realEstate.sqft}</Title>
-                <Text>SQFT</Text>
-              </Stack>
-
-              <Stack>
-                <Title order={3}>{realEstate.yearBuilt}</Title>
-                <Text>Year Built</Text>
-              </Stack>
-            </Group>
-          </Card>
+          <Info realEstate={realEstate} />
 
           <Text>{realEstate.description}</Text>
         </Stack>
@@ -114,5 +78,53 @@ const RealEstateDetail = ({ realEstate }: Props) => {
     </Grid>
   );
 };
+
+function Header({
+  realEstate: { title, location, salePrice, dateListed },
+}: Props) {
+  return (
+    <Group justify={"space-between"} component={"header"}>
+      <Stack gap={"xs"}>
+        <Title order={1} fw={500}>
+          {title}
+        </Title>
+        <Text size="lg">{location}</Text>
+      </Stack>
+      <Stack gap={"xs"} align="flex-end">
+        <Title order={1} fw={500}>
+          {formatDollar(salePrice)}
+        </Title>
+        <Text c={"gray"}>{formatDate(dateListed)}</Text>
+      </Stack>
+    </Group>
+  );
+}
+
+function Info({
+  realEstate: { bathrooms, bedrooms, parking, sqft, yearBuilt },
+}: Props) {
+  const items = [
+    { label: "Bedrooms", value: bedrooms },
+    { label: "Bathrooms", value: bathrooms },
+    { label: "Parking", value: parking },
+    { label: "SQFT", value: sqft },
+    { label: "Year Built", value: yearBuilt },
+  ];
+
+  return (
+    <Card withBorder p={"lg"} component="section">
+      <Group justify="space-between">
+        {items.map((item) => (
+          <Stack key={item.label} gap={0} align="center">
+            <Text size="xl" fw={"bold"}>
+              {item.value}
+            </Text>
+            <Text>{item.label}</Text>
+          </Stack>
+        ))}
+      </Group>
+    </Card>
+  );
+}
 
 export default RealEstateDetail;
