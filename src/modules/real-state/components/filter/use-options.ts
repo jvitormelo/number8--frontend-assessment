@@ -31,14 +31,12 @@ const minPrice = Math.min(
   ...allRealEstateData.map((realEstate) => realEstate.salePrice)
 );
 
-const MARGIN = 20_000;
-
 export function useRealStateFilterOptions() {
   return {
     bedroomsOptions,
     bathroomsOptions,
     parkingOptions,
-    maxPrice: maxPrice + MARGIN,
-    minPrice: minPrice - MARGIN,
+    maxPrice: maxPrice,
+    minPrice: minPrice,
   };
 }

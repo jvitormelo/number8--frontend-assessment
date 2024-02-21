@@ -15,7 +15,6 @@ type Props = {
 };
 
 // I could have used client side filtering, but because is a with Next.js, I decided to use SSR
-// Because this is only demo, I did not put a SSR loading state
 export const getServerSideProps: GetServerSideProps<Props> = async (
   context
 ) => {
