@@ -7,10 +7,11 @@ import {
   List,
   ListItem,
   Modal,
+  Stack,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useLocalStorage } from "@mantine/hooks";
-import { List as ListIcon } from "lucide-react";
+import { List as ListIcon, Trash, TrashIcon } from "lucide-react";
 import Link from "next/link";
 
 import styles from "./styles.module.css";
@@ -60,6 +61,10 @@ export function SaveProperty({ realEstate }: Props) {
     }
   }
 
+  function removeProperty(id: number) {
+    setSavedProperties((oldValue) => oldValue.filter((item) => item.id !== id));
+  }
+
   return (
     <>
       <Group gap={"xs"}>
@@ -73,15 +78,27 @@ export function SaveProperty({ realEstate }: Props) {
       </Group>
 
       <Modal opened={opened} onClose={close} title="Saved Properties">
-        <List spacing={"xs"}>
+        <Stack p={0} m={0} gap={"xs"} component={"ul"}>
           {savedProperties.map((realEstate) => (
-            <ListItem key={realEstate.id} className={styles.listItem}>
+            <Group
+              key={realEstate.id}
+              component={"li"}
+              justify="space-between"
+              className={styles.listItem}
+            >
               <Link href={`/${realEstate.slug}`} target="_blank">
                 {realEstate.title}
               </Link>
-            </ListItem>
+
+              <ActionIcon
+                onClick={() => removeProperty(realEstate.id)}
+                color="red"
+              >
+                <TrashIcon size={20} />
+              </ActionIcon>
+            </Group>
           ))}
-        </List>
+        </Stack>
       </Modal>
     </>
   );
