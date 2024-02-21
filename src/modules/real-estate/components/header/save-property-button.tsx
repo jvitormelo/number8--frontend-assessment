@@ -1,17 +1,8 @@
 import { useToast } from "@/hooks/use-toast";
 import { RealEstate } from "@/modules/real-estate/types";
-import {
-  ActionIcon,
-  Button,
-  Group,
-  List,
-  ListItem,
-  Modal,
-  Stack,
-} from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
-import { useLocalStorage } from "@mantine/hooks";
-import { List as ListIcon, Trash, TrashIcon } from "lucide-react";
+import { ActionIcon, Button, Group, Modal, Stack, Text } from "@mantine/core";
+import { useDisclosure, useLocalStorage } from "@mantine/hooks";
+import { List as ListIcon, TrashIcon } from "lucide-react";
 import Link from "next/link";
 
 import styles from "./styles.module.css";
@@ -98,6 +89,8 @@ export function SaveProperty({ realEstate }: Props) {
               </ActionIcon>
             </Group>
           ))}
+
+          {savedProperties.length === 0 && <Text>No saved properties</Text>}
         </Stack>
       </Modal>
     </>

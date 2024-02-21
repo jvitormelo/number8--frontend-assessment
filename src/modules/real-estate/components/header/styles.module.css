@@ -9,12 +9,3 @@
 .listItem a {
   text-decoration: underline;
 }
-
-.listItem button {
-  opacity: 0;
-  transition: opacity 0.2s ease-in-out;
-}
-
-.listItem:hover button {
-  opacity: 1;
-}
