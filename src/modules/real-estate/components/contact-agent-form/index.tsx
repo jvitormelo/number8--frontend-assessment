@@ -2,7 +2,7 @@ import { Form } from "@/components/form";
 import { useFeedback } from "@/hooks/use-feedback";
 import { useContactAgentForm } from "./use-form";
 
-import { Alert, Button, Card, Stack, Text } from "@mantine/core";
+import { Alert, Button, Card, Stack, Text, Transition } from "@mantine/core";
 
 export function ContactAgentForm() {
   const { control, handleSubmit, reset } = useContactAgentForm();
@@ -11,7 +11,7 @@ export function ContactAgentForm() {
   const onSubmit = handleSubmit((data) => {
     setFeedback({
       title: "Message sent successfully",
-      message: "We will contact you soon",
+      message: "We will contact you soon!",
       color: "green",
     });
 
@@ -27,10 +27,23 @@ export function ContactAgentForm() {
             Contact Agent
           </Text>
 
+          <Transition transition={"fade"} duration={500} mounted={!!feedback}>
+            {(styles) => (
+              <Alert
+                style={styles}
+                color={feedback?.color}
+                title={feedback?.title}
+              >
+                {feedback?.message}
+              </Alert>
+            )}
+          </Transition>
+
           <Form.TextInput
             name="name"
             control={control}
             label="Full Name"
+            placeholder="Your full name"
             required
           />
 
@@ -39,6 +52,7 @@ export function ContactAgentForm() {
             control={control}
             label="Email"
             type="email"
+            placeholder="Your email"
             required
           />
 
@@ -47,21 +61,17 @@ export function ContactAgentForm() {
             control={control}
             label="Phone Number"
             type="tel"
+            placeholder="Your phone number"
             required
           />
 
           <Form.TextArea
-            name="comment"
+            name="comments"
             control={control}
             label="Comments"
+            placeholder="Your message"
             required
           />
-
-          {feedback && (
-            <Alert color={feedback.color} title={feedback.title}>
-              {feedback.message}
-            </Alert>
-          )}
 
           <Button type="submit">Contact Now</Button>
         </Stack>

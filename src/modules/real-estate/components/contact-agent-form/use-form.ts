@@ -9,7 +9,7 @@ const formSchema = object({
   name: string().required(),
   email: string().email().required(),
   phone: string().matches(allowNumbersRegex, "Only numbers").required(),
-  comment: string().required(),
+  comments: string().required(),
 });
 
 export const useContactAgentForm = () => {
@@ -20,7 +20,7 @@ export const useContactAgentForm = () => {
       name: "",
       email: "",
       phone: "",
-      comment: "",
+      comments: "",
     },
   });
 
