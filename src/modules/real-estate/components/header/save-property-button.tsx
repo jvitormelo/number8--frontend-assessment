@@ -1,12 +1,12 @@
 import { useToast } from "@/hooks/use-toast";
 import { RealEstate } from "@/modules/real-estate/types";
 import { ActionIcon, Button, Group, Modal, Stack, Text } from "@mantine/core";
-import { useDisclosure, useLocalStorage } from "@mantine/hooks";
-import { Heart, HeartOff, List as ListIcon, TrashIcon } from "lucide-react";
+import { useDisclosure } from "@mantine/hooks";
+import { Heart, List as ListIcon, TrashIcon } from "lucide-react";
 import Link from "next/link";
 
-import styles from "./styles.module.css";
 import { useSavedProperties } from "../../hooks/use-saved-properties";
+import styles from "./styles.module.css";
 
 type Props = {
   realEstate: RealEstate;
