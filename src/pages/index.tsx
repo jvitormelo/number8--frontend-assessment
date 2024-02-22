@@ -1,5 +1,6 @@
 import { allRealEstateData } from "@/modules/real-estate/data";
-import { filterRealState } from "@/modules/real-estate/utils/filter-real-state";
+import { filterRealEstate } from "@/modules/real-estate/utils/filter-real-estate";
+
 import { parseRealEstateQuery } from "@/modules/real-estate/utils/parse-query";
 import { RealEstatesView } from "@/modules/real-estate/views/real-estates";
 import { GetServerSideProps } from "next";
@@ -23,7 +24,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
 
   return {
     props: {
-      realState: filterRealState(allRealEstateData, filters),
+      realState: filterRealEstate(allRealEstateData, filters),
       initialFilters: filters,
     },
   };
