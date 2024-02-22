@@ -51,6 +51,7 @@ I really recommend building the application and running it in production mode. (
 - I used Yup + React Hook Form to handle the form, just because I like schema based forms.
 - I went with a really simple design, mostly following the example.
 - I added a simple responsive design, but I didn't go full mobile first.
+- I didn't use any semantic commits; I used GitHub Copilot to write the commit messages.
 
 # Bonus
 
