@@ -1,9 +1,7 @@
+import { allowNumbersRegex } from "@/utils/string";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { object, string } from "yup";
-
-// TODO > move to a shared file
-const allowNumbersRegex = /^\d*$/;
 
 const formSchema = object({
   name: string().required(),
