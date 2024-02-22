@@ -95,7 +95,6 @@ function useSavedPropertiesActions(realEstate: RealEstate) {
       showToast({
         title: "Property Removed",
         message: `You have removed ${realEstate.title} from your list of properties`,
-        color: "red",
       });
       return;
     }
