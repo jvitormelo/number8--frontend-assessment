@@ -1,5 +1,6 @@
 import Mock from "@/../public/mock.json";
 import { RealEstate } from "@/modules/real-estate/types";
+import { slugify } from "@/utils/string";
 
 // I didn't understand if was to fetch the JSON or copy the file to the project
 // So i Went with the easiest way
@@ -24,11 +25,6 @@ const mapRealEstate = (): RealEstate[] => {
 
 function randomPicture(id: number, width: number, height: number) {
   return `https://picsum.photos/seed/${id}/${width}/${height}`;
-}
-
-// TODO > Move to utils
-function slugify(text: string, id: number) {
-  return text.toLowerCase().replace(/ /g, "-") + "-" + id;
 }
 
 export const allRealEstateData = mapRealEstate();
