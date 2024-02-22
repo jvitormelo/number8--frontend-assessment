@@ -149,7 +149,7 @@ function DynamicDrawer({
 
   if (isMobile) return <Drawer {...rest}>{children}</Drawer>;
 
-  return children;
+  return <Box visibleFrom="md">{children}</Box>;
 }
 
 function PriceRangeSlider({

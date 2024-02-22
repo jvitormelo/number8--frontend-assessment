@@ -1,40 +1,57 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Install
 
-## Getting Started
+I recommend using node version v20.9.0 or higher and Yarn as package manager.
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+yarn install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# Run
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+- Dev
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+```
+yarn dev
+```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- Build & Production
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```
+yarn build
+yarn start
+```
 
-## Learn More
+# Automated Tests
 
-To learn more about Next.js, take a look at the following resources:
+Run unit tests
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+yarn test:unit
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Run component tests
 
-## Deploy on Vercel
+```
+yarn test:components
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# How to Test the Application
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+I really recommend building the application and running it in production mode. (yarn start)
+
+# Technical Decisions
+
+- I didn't understand if it was to fetch the URL to get the JSON or copy into the project, so i went with the easiest way.
+- I used Next.js because i want to have SSR and SSG out of the box. I felt that for this project would be better, I got to pre-render the real estate page and have a better first load time.
+- I went full server side to "fetch" the data (but I'm also really good with client side fetching, <3 tanstack query).
+- I used a component library called MantineUi to help me in development speed.
+- I could used Context to avoid some props drilling, but i didn't want to over engineer the solution.
+- I did some simple tests. Used Vitest to do unit Test, and Cypress to do component tests (Yes, you can use cypress to do component tests, and it's really good)
+- The structure folder is more focused on the feature and code locality.
+- I used Yup + React Hook Form to handle the form, just because I like schema based forms.
+- I went with a really simple design, mostly following the example.
+- I added a simple responsive design, but I didn't go full mobile first.
+
+# Bonus
+
+- I added one more feature, if you favorite a real estate, it will show in the card in the list page.
