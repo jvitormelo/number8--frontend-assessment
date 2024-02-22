@@ -1,5 +1,5 @@
 import { RealStateFilterSection } from "@/modules/real-estate/components/filter";
-import { RealStateList } from "@/modules/real-estate/components/list";
+import { RealEstateList } from "@/modules/real-estate/components/list";
 import { RealEstate, RealEstateFilter } from "@/modules/real-estate/types";
 import { Stack } from "@mantine/core";
 import { useRouter } from "next/router";
@@ -17,7 +17,7 @@ export function RealEstatesView({ initialFilters, realState }: Props) {
         key={JSON.stringify(initialFilters)}
         initialFilters={initialFilters}
       />
-      <RealStateList realState={realState} />
+      <RealEstateList realEstates={realState} />
     </Stack>
   );
 }

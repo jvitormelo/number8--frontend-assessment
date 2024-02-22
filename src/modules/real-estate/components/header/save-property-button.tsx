@@ -6,17 +6,16 @@ import { Heart, HeartOff, List as ListIcon, TrashIcon } from "lucide-react";
 import Link from "next/link";
 
 import styles from "./styles.module.css";
+import { useSavedProperties } from "../../hooks/use-saved-properties";
 
 type Props = {
   realEstate: RealEstate;
 };
 
-type SavedRealEstate = Pick<RealEstate, "id" | "title" | "slug">;
-
 export function SaveProperty({ realEstate }: Props) {
   const [opened, { open, close }] = useDisclosure(false);
   const { savedProperties, isSaved, removeProperty, handleSave } =
-    useSavedProperties(realEstate);
+    useSavedPropertiesActions(realEstate);
 
   return (
     <>
@@ -70,14 +69,9 @@ export function SaveProperty({ realEstate }: Props) {
   );
 }
 
-function useSavedProperties(realEstate: RealEstate) {
+function useSavedPropertiesActions(realEstate: RealEstate) {
   const { showToast } = useToast();
-  const [savedProperties, setSavedProperties] = useLocalStorage<
-    SavedRealEstate[]
-  >({
-    key: "saved-properties",
-    defaultValue: [],
-  });
+  const { savedProperties, setSavedProperties } = useSavedProperties();
 
   const isSaved = savedProperties.some(({ id }) => id === realEstate.id);
 

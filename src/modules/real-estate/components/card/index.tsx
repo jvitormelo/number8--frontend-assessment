@@ -1,39 +1,46 @@
 import { RealEstate } from "@/modules/real-estate/types";
 import { formatCurrency } from "@/utils/currency";
-import { Badge, Box, Button, Card, Stack, Text } from "@mantine/core";
+import { Badge, Box, Button, Card, Group, Stack, Text } from "@mantine/core";
+import { Heart } from "lucide-react";
+
 import Image from "next/image";
 import Link from "next/link";
+import { memo } from "react";
 
 type Props = {
-  realState: RealEstate;
+  realEstate: RealEstate;
+  isSaved: boolean;
 };
 
-export const RealStateCard = ({ realState }: Props) => {
+const RealEstateCardComponent = ({ realEstate, isSaved }: Props) => {
   return (
     <Card shadow="sm" padding="lg" radius="md" withBorder>
       <Box pos={"relative"} h={"150px"}>
         <Image
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 20vw"
-          src={realState.thumbnailURL}
+          src={realEstate.thumbnailURL}
           fill
-          alt={realState.title}
+          alt={realEstate.title}
         />
       </Box>
 
       <Stack my={"md"} gap={"xs"}>
-        <Text fw={500}>{realState.title}</Text>
-        <Badge color="gray">Location</Badge>
+        <Text fw={500}>{realEstate.title}</Text>
+        <Group gap={"xs"}>
+          <Badge color="gray">Location</Badge>
+          {isSaved && <Heart fill="red" size={20} />}
+        </Group>
         <Text size="sm" c="dimmed">
-          {realState.bedrooms} Bedrooms | {realState.bathrooms} Bathrooms
+          {realEstate.bedrooms} Bedrooms | {realEstate.bathrooms} Bathrooms
         </Text>
       </Stack>
 
       <Box mt="auto">
         <Text size="lg" fw={"bold"} mb={"md"} c="dark">
-          {formatCurrency(realState.salePrice)}
+          {formatCurrency(realEstate.salePrice)}
         </Text>
 
-        <Link href={`/${realState.slug}`}>
+        <Link href={`/${realEstate.slug}`}>
           <Button color="blue" fullWidth radius="md">
             View Details
           </Button>
@@ -42,3 +49,5 @@ export const RealStateCard = ({ realState }: Props) => {
     </Card>
   );
 };
+
+export const RealEstateCard = memo(RealEstateCardComponent);
