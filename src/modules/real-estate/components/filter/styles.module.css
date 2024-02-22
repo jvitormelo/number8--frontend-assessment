@@ -1,0 +1,17 @@
+.filterContainer {
+  flex-direction: row;
+  align-items: flex-end;
+
+  @media (max-width: $mantine-breakpoint-md) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.filterIcon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 100;
+  box-shadow: var(--mantine-shadow-lg);
+}
