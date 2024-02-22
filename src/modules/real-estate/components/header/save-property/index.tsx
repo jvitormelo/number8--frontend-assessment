@@ -20,13 +20,21 @@ export function SaveProperty({ realEstate }: Props) {
   return (
     <>
       <Group gap={"xs"}>
-        <ActionIcon variant="light" size={"lg"} onClick={open} h={"full"}>
+        <ActionIcon
+          data-cy="openModalButton"
+          aria-label="Open saved properties"
+          variant="light"
+          size={"lg"}
+          onClick={open}
+          h={"full"}
+        >
           <ListIcon size={20} />
         </ActionIcon>
 
         <Button
           w={180}
           onClick={handleSave}
+          data-cy="saveButton"
           leftSection={
             isSaved ? (
               <Heart color="red" fill="red" size={20} />
@@ -55,6 +63,7 @@ export function SaveProperty({ realEstate }: Props) {
               </Link>
 
               <ActionIcon
+                data-cy="removePropertyButton"
                 onClick={() => removeProperty(realEstate.id)}
                 color="red"
               >
