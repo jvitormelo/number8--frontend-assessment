@@ -2,6 +2,7 @@
   flex-direction: row;
   align-items: flex-end;
 
+  /* This works, but is giving IDE errors */
   @media (max-width: $mantine-breakpoint-md) {
     flex-direction: column;
     align-items: flex-start;
