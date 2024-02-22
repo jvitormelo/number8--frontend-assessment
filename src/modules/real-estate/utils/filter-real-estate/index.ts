@@ -9,7 +9,7 @@ function equalFilter(
 
 type Condition = (realState: RealEstate) => boolean;
 
-export function filterRealState(
+export function filterRealEstate(
   realState: RealEstate[],
   filters: RealEstateFilter
 ) {
