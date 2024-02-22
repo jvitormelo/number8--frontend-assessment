@@ -25,7 +25,7 @@ const realEstate: RealEstate = {
   yearBuilt: 2021,
 };
 
-describe("should render save property button", () => {
+describe("Save Property Feature", () => {
   beforeEach(() => {
     cy.clearLocalStorage();
   });

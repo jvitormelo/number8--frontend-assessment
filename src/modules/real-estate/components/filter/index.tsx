@@ -41,29 +41,34 @@ export const RealStateFilterSection = ({
     minPrice,
   } = useRealStateFilterOptions();
 
-  function handleSearch() {
+  async function handleSearch() {
     setIsLoading(true);
 
-    const filteredFilter: Record<string, string> = {};
+    try {
+      const filteredFilter: Record<string, string> = {};
 
-    Object.entries(filter).forEach(([key, value]) => {
-      if (value) {
-        filteredFilter[key] = value.toString();
-      }
-    });
+      Object.entries(filter).forEach(([key, value]) => {
+        if (value) {
+          filteredFilter[key] = value.toString();
+        }
+      });
 
-    search(filteredFilter).finally(() => {
+      await search(filteredFilter);
+    } finally {
       setIsLoading(false);
-    });
-    setIsDrawerOpened(false);
+      setIsDrawerOpened(false);
+    }
   }
 
-  function handleClear() {
-    setIsLoading(true);
-    clear().finally(() => {
+  async function handleClear() {
+    try {
+      setIsLoading(true);
+
+      await clear();
+    } finally {
       setIsLoading(false);
-    });
-    setIsDrawerOpened(false);
+      setIsDrawerOpened(false);
+    }
   }
 
   return (

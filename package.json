@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "test:unit": "vitest",
-    "test:components": "cypress run -b chrome --component "
+    "test:components": "cypress run -b chrome --component",
+    "cypress:open": "cypress open --component -b chrome"
   },
   "dependencies": {
     "@hookform/resolvers": "3.3.4",
