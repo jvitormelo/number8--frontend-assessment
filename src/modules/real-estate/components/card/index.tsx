@@ -15,14 +15,14 @@ type Props = {
 const RealEstateCardComponent = ({ realEstate, isSaved }: Props) => {
   return (
     <Card shadow="sm" padding="lg" radius="md" withBorder>
-      <Box pos={"relative"} h={"150px"}>
+      <Card pos={"relative"} h={"150px"} radius={"md"} bg={"gray.3"}>
         <Image
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 20vw"
           src={realEstate.thumbnailURL}
           fill
           alt={realEstate.title}
         />
-      </Box>
+      </Card>
 
       <Stack my={"md"} gap={"xs"}>
         <Text title={realEstate.title} fw={500} truncate="end">

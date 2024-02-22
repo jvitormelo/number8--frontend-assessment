@@ -4,7 +4,6 @@ export type RealEstate = {
   title: string;
   description: string;
   salePrice: number;
-  thumbnailURL: string;
   pictureURL: string;
   location: string;
   sqft: number;
@@ -12,6 +11,7 @@ export type RealEstate = {
   bathrooms: number;
   parking: number;
   yearBuilt: number;
+  thumbnailURL: string;
   slug: string;
 };
 

@@ -30,14 +30,23 @@ export const RealEstateDetailView = ({ realEstate }: Props) => {
       <Grid gutter={"lg"}>
         <GridCol span={{ xs: 12, md: 8 }}>
           <Stack>
-            <Box pos={"relative"} h={"400px"}>
+            <Card
+              radius={"md"}
+              bg={"gray.3"}
+              pos={"relative"}
+              style={{
+                aspectRatio: "1/1",
+                maxHeight: "400px",
+              }}
+            >
               <ImageNext
                 src={realEstate.pictureURL}
                 alt={realEstate.title}
+                quality={100}
                 fill
                 sizes="(max-width: 768px) 100vw,  70vw"
               />
-            </Box>
+            </Card>
             <Card withBorder title="Sale Price" hiddenFrom="md">
               <Text>Sale Price</Text>
               <Flex>

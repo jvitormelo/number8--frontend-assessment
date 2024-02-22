@@ -12,15 +12,19 @@ const mapRealEstate = (): RealEstate[] => {
     id: realState.Id,
     location: realState.Location,
     parking: realState.Parking,
-    pictureURL: realState.PictureURL,
     salePrice: realState["Sale Price"],
     sqft: realState.Sqft,
-    thumbnailURL: realState.ThumbnailURL,
     title: realState.Title,
     yearBuilt: realState.YearBuilt,
     slug: slugify(realState.Title, realState.Id),
+    pictureURL: randomPicture(realState.Id, 350, 350),
+    thumbnailURL: randomPicture(realState.Id, 150, 150),
   }));
 };
+
+function randomPicture(id: number, width: number, height: number) {
+  return `https://picsum.photos/seed/${id}/${width}/${height}`;
+}
 
 // TODO > Move to utils
 function slugify(text: string, id: number) {
