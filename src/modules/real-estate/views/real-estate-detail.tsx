@@ -12,6 +12,7 @@ import {
   Stack,
   Text,
 } from "@mantine/core";
+import Head from "next/head";
 import ImageNext from "next/image";
 
 type Props = {
@@ -21,6 +22,9 @@ type Props = {
 export const RealEstateDetailView = ({ realEstate }: Props) => {
   return (
     <>
+      <Head>
+        <title>{realEstate.title}</title>
+      </Head>
       <BackButton mb={"xs"} />
       <RealEstateHeader realEstate={realEstate} />
       <Grid gutter={"lg"}>
