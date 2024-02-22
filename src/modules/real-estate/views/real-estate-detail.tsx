@@ -2,7 +2,16 @@ import { BackButton } from "@/components/back-button";
 import { ContactAgentForm } from "@/modules/real-estate/components/contact-agent-form";
 import { RealEstateHeader } from "@/modules/real-estate/components/header";
 import { RealEstate } from "@/modules/real-estate/types";
-import { Box, Card, Grid, GridCol, Group, Stack, Text } from "@mantine/core";
+import {
+  Box,
+  Card,
+  Flex,
+  Grid,
+  GridCol,
+  Group,
+  Stack,
+  Text,
+} from "@mantine/core";
 import ImageNext from "next/image";
 
 type Props = {
@@ -25,6 +34,12 @@ export const RealEstateDetailView = ({ realEstate }: Props) => {
                 sizes="(max-width: 768px) 100vw,  70vw"
               />
             </Box>
+            <Card withBorder title="Sale Price" hiddenFrom="md">
+              <Text>Sale Price</Text>
+              <Flex>
+                <RealEstateHeader.Price salePrice={realEstate.salePrice} />
+              </Flex>
+            </Card>
             <Info realEstate={realEstate} />
 
             <Text>{realEstate.description}</Text>

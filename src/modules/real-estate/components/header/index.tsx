@@ -1,9 +1,8 @@
 import { RealEstate } from "@/modules/real-estate/types";
 import { formatCurrency } from "@/utils/currency";
 import { formatDate } from "@/utils/date";
-import { Flex, Grid, GridCol, Group, Stack, Text, Title } from "@mantine/core";
+import { Box, Flex, Grid, GridCol, Stack, Text, Title } from "@mantine/core";
 import dynamic from "next/dynamic";
-import { Suspense } from "react";
 
 const SavePropertyButton = dynamic(
   () => import("./save-property-button").then((mod) => mod.SaveProperty),
@@ -15,31 +14,50 @@ type Props = {
 };
 
 export function RealEstateHeader({ realEstate }: Props) {
+  const date = formatDate(realEstate.dateListed);
   return (
     <Grid component={"header"}>
       <GridCol span={{ lg: 8, xs: 12 }}>
-        <Group justify={"space-between"}>
+        <Flex justify={"space-between"}>
           <Stack gap={0}>
-            <Title order={2} fw={500}>
+            <Title order={2} fw={500} style={{ textWrap: "balance" }}>
               {realEstate.title}
             </Title>
-            <Text size="lg">{realEstate.location}</Text>
+
+            <Flex align={"center"} justify={"space-between"}>
+              <Text size="lg">{realEstate.location}</Text>
+
+              <Text hiddenFrom="md" c={"gray"}>
+                {date}
+              </Text>
+            </Flex>
           </Stack>
           <Stack gap={0} align="flex-end">
-            <Title order={2} fw={500}>
-              {formatCurrency(realEstate.salePrice)}
-            </Title>
-            <Text c={"gray"}>{formatDate(realEstate.dateListed)}</Text>
+            <Box visibleFrom="md">
+              <Price salePrice={realEstate.salePrice} />
+            </Box>
+
+            <Text visibleFrom="md" c={"gray"}>
+              {date}
+            </Text>
           </Stack>
-        </Group>
+        </Flex>
       </GridCol>
       <GridCol span={{ lg: 4, xs: 12 }} display={"flex"}>
         <Flex ml={"auto"} mt={"xs"}>
-          <Suspense fallback={<div>Loading...</div>}>
-            <SavePropertyButton realEstate={realEstate} />
-          </Suspense>
+          <SavePropertyButton realEstate={realEstate} />
         </Flex>
       </GridCol>
     </Grid>
+  );
+}
+
+RealEstateHeader.Price = Price;
+
+function Price({ salePrice }: { salePrice: number }) {
+  return (
+    <Title order={2} fw={500}>
+      {formatCurrency(salePrice)}
+    </Title>
   );
 }
