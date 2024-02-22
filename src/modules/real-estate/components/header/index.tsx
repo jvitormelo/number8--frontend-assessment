@@ -5,7 +5,7 @@ import { Box, Flex, Grid, GridCol, Stack, Text, Title } from "@mantine/core";
 import dynamic from "next/dynamic";
 
 const SavePropertyButton = dynamic(
-  () => import("./save-property-button").then((mod) => mod.SaveProperty),
+  () => import("./save-property").then((mod) => mod.SaveProperty),
   { ssr: false }
 );
 

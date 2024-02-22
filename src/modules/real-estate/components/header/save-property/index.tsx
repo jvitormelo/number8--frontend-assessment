@@ -5,7 +5,7 @@ import { useDisclosure } from "@mantine/hooks";
 import { Heart, List as ListIcon, TrashIcon } from "lucide-react";
 import Link from "next/link";
 
-import { useSavedProperties } from "../../hooks/use-saved-properties";
+import { useSavedProperties } from "../../../hooks/use-saved-properties";
 import styles from "./styles.module.css";
 
 type Props = {
