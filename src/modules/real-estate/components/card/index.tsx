@@ -25,7 +25,9 @@ const RealEstateCardComponent = ({ realEstate, isSaved }: Props) => {
       </Box>
 
       <Stack my={"md"} gap={"xs"}>
-        <Text fw={500}>{realEstate.title}</Text>
+        <Text title={realEstate.title} fw={500} truncate="end">
+          {realEstate.title}
+        </Text>
         <Group gap={"xs"}>
           <Badge color="gray">Location</Badge>
           {isSaved && <Heart fill="red" size={20} />}

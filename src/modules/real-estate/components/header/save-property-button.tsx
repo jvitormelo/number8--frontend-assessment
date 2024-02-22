@@ -47,9 +47,10 @@ export function SaveProperty({ realEstate }: Props) {
               key={realEstate.id}
               component={"li"}
               justify="space-between"
+              wrap="nowrap"
               className={styles.listItem}
             >
-              <Link href={`/${realEstate.slug}`} target="_blank">
+              <Link passHref href={`/${realEstate.slug}`} target="_blank">
                 {realEstate.title}
               </Link>
 
