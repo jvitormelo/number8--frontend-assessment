@@ -76,6 +76,7 @@ export const RealStateFilterSection = ({
       <ActionIcon
         size={"xl"}
         variant="gradient"
+        title="Filters"
         onClick={() => setIsDrawerOpened(true)}
         hiddenFrom="md"
         className={styles.filterIcon}

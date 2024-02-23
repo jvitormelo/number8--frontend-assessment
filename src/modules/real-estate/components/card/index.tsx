@@ -15,11 +15,17 @@ type Props = {
 const RealEstateCardComponent = ({ realEstate, isSaved }: Props) => {
   return (
     <Card shadow="sm" padding="lg" radius="md" withBorder>
-      <Card pos={"relative"} h={"150px"} radius={"md"} bg={"gray.3"}>
+      <Card
+        pos={"relative"}
+        style={{ aspectRatio: "16/9" }}
+        w={"100%"}
+        radius={"md"}
+        bg={"gray.3"}
+      >
         <Image
+          fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 20vw"
           src={realEstate.thumbnailURL}
-          fill
           alt={realEstate.title}
         />
       </Card>
