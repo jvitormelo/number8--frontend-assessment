@@ -3,7 +3,7 @@ import { allRealEstateData } from "@/modules/real-estate/data";
 function createUniqueOptions(data: number[]): string[] {
   const uniqueOptions = new Set(data);
 
-  return Array.from(uniqueOptions, String).toSorted();
+  return Array.from(uniqueOptions, String).sort();
 }
 
 const bedroomsOptions = createUniqueOptions(
